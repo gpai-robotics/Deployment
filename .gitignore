@@ -33,5 +33,5 @@ go2/reference_repos/unitree_rl_mjlab
 go2/policies/**
 
 # bundles
-/go2/go2/**
+/go2/go2/ 
 
