@@ -22,14 +22,16 @@ Makefile
 logs/
 
 # Generated artifacts
-go2/artifacts/
+go2/artifacts/**
 
 # Reference repositories
-go2/reference_repos/
+go2/reference_repos/sim2real_unitree_sdk2py
+go2/reference_repos/unitree_sdk2
+go2/reference_repos/unitree_rl_mjlab
 
 # Policy bundles
-go2/policies/
+go2/policies/**
 
-# bundles 
+# bundles
+/go2/go2/**
 
-/go2/go2 
