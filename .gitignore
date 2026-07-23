@@ -21,17 +21,18 @@ Makefile
 *.log
 logs/
 
-# Generated artifacts
-go2/artifacts/**
+# Generated artifacts (keep the directory visible in Git)
+go2/artifacts/*
+!go2/artifacts/.gitkeep
 
 # Reference repositories
 go2/reference_repos/sim2real_unitree_sdk2py
 go2/reference_repos/unitree_sdk2
 go2/reference_repos/unitree_rl_mjlab
 
-# Policy bundles
-go2/policies/**
+# Policy bundles (keep the directory visible in Git)
+go2/policies/*
+!go2/policies/.gitkeep
 
-# bundles
-/go2/go2/ 
-
+# Bundles
+/go2/go2
