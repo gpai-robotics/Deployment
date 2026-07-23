@@ -30,3 +30,6 @@ go2/reference_repos/
 # Policy bundles
 go2/policies/
 
+# bundles 
+
+/go2/go2 
