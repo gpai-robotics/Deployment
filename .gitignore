@@ -1,0 +1,32 @@
+# ============================================================
+# Deployment Repository
+# ============================================================
+
+# VS Code
+.vscode/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Build artifacts
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+Makefile
+
+# Local logs
+*.log
+logs/
+
+# Generated artifacts
+go2/artifacts/
+
+# Reference repositories
+go2/reference_repos/
+
+# Policy bundles
+go2/policies/
+
