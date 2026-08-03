@@ -2,7 +2,11 @@
 set -euo pipefail
 
 REPO_ROOT=$REPO 
-MJLAB_ROOT="${REPO_ROOT}/go2/reference_repos/Unitree_mjlab_repo/unitree_rl_mjlab"
+# This must match run_unitree_mjlab_sim_deploy.sh.  Building from a different
+# checkout bakes that checkout's absolute thirdparty/onnxruntime path into the
+# ELF RUNPATH, which can make the launcher silently use an incompatible system
+# libonnxruntime instead.
+MJLAB_ROOT="${REPO_ROOT}/go2/reference_repos/unitree_rl_mjlab"
 SDK_SRC="${UNITREE_SDK2_SRC:-${REPO_ROOT}/go2/reference_repos/unitree_sdk2}"
 SDK_INSTALL="${UNITREE_SDK2_INSTALL:-${SDK_SRC}/install}"
 GO2_BUILD="${MJLAB_ROOT}/deploy/robots/go2/build"
@@ -135,6 +139,15 @@ build_controller() {
   local ddscxx_include
   ddscxx_include="$(ddscxx_include_dir)"
 
+  # CMake refuses to reuse a build tree configured from a different checkout.
+  # This is especially important here because its generated executable embeds
+  # absolute RUNPATH entries for the source tree's bundled ONNX Runtime.
+  local expected_source="${MJLAB_ROOT}/deploy/robots/go2"
+  if [[ -f "${GO2_BUILD}/CMakeCache.txt" ]] && \
+    ! rg -Fqx "CMAKE_HOME_DIRECTORY:INTERNAL=${expected_source}" "${GO2_BUILD}/CMakeCache.txt"; then
+    echo "Resetting stale controller build directory configured from another source checkout: ${GO2_BUILD}"
+    rm -rf "${GO2_BUILD}"
+  fi
   mkdir -p "${GO2_BUILD}"
   cmake -S "${MJLAB_ROOT}/deploy/robots/go2" -B "${GO2_BUILD}" \
     -DCMAKE_CXX_FLAGS="-I${SDK_INSTALL}/include -I${ddscxx_include} -I/usr/include/eigen3" \
@@ -159,7 +172,11 @@ build_sim() {
 
 verify_binaries() {
   local failed=0
-  for bin in "${CTRL_BIN}" "${SIM_BIN}"; do
+  local binaries=("$@")
+  if ((${#binaries[@]} == 0)); then
+    binaries=("${CTRL_BIN}" "${SIM_BIN}")
+  fi
+  for bin in "${binaries[@]}"; do
     if [[ ! -x "${bin}" ]]; then
       echo "[FAIL] missing executable: ${bin}" >&2
       failed=1
@@ -191,11 +208,11 @@ main() {
       ;;
     controller)
       build_controller
-      verify_binaries
+      verify_binaries "${CTRL_BIN}"
       ;;
     sim)
       build_sim
-      verify_binaries
+      verify_binaries "${SIM_BIN}"
       ;;
     verify)
       verify_binaries

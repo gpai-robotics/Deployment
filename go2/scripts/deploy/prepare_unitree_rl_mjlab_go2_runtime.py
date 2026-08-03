@@ -26,7 +26,6 @@ DEFAULT_GO2_DEPLOY_DIR = (
     REPO_ROOT
     / "go2"
     / "reference_repos"
-    / "Unitree_mjlab_repo"
     / "unitree_rl_mjlab"
     / "deploy"
     / "robots"

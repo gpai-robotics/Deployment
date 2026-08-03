@@ -1,0 +1,313 @@
+joint_ids_map:
+  - 3
+  - 0
+  - 9
+  - 6
+  - 4
+  - 1
+  - 10
+  - 7
+  - 5
+  - 2
+  - 11
+  - 8
+step_dt: 0.02
+stiffness:
+  - 25.0
+  - 25.0
+  - 25.0
+  - 25.0
+  - 25.0
+  - 25.0
+  - 25.0
+  - 25.0
+  - 25.0
+  - 25.0
+  - 25.0
+  - 25.0
+damping:
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+  - 0.5
+default_joint_pos:
+  - 0.1
+  - -0.1
+  - 0.1
+  - -0.1
+  - 0.8
+  - 0.8
+  - 1.0
+  - 1.0
+  - -1.5
+  - -1.5
+  - -1.5
+  - -1.5
+commands:
+  base_velocity:
+    default:
+      - 0.5
+      - 0.0
+      - 0.0
+    ranges:
+      ang_vel_z:
+        - -0.6
+        - 0.6
+      lin_vel_x:
+        - -0.8
+        - 0.8
+      lin_vel_y:
+        - -0.3
+        - 0.3
+actions:
+  JointPositionAction:
+    clip:
+      -
+        - -100.0
+        - 100.0
+      -
+        - -100.0
+        - 100.0
+      -
+        - -100.0
+        - 100.0
+      -
+        - -100.0
+        - 100.0
+      -
+        - -100.0
+        - 100.0
+      -
+        - -100.0
+        - 100.0
+      -
+        - -100.0
+        - 100.0
+      -
+        - -100.0
+        - 100.0
+      -
+        - -100.0
+        - 100.0
+      -
+        - -100.0
+        - 100.0
+      -
+        - -100.0
+        - 100.0
+      -
+        - -100.0
+        - 100.0
+    joint_names:
+      - FL_hip_joint
+      - FR_hip_joint
+      - RL_hip_joint
+      - RR_hip_joint
+      - FL_thigh_joint
+      - FR_thigh_joint
+      - RL_thigh_joint
+      - RR_thigh_joint
+      - FL_calf_joint
+      - FR_calf_joint
+      - RL_calf_joint
+      - RR_calf_joint
+    joint_ids:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+    scale:
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+      - 0.25
+    offset:
+      - 0.1
+      - -0.1
+      - 0.1
+      - -0.1
+      - 0.8
+      - 0.8
+      - 1.0
+      - 1.0
+      - -1.5
+      - -1.5
+      - -1.5
+      - -1.5
+observations:
+  policy_obs:
+    base_ang_vel:
+      params:
+      clip: null
+      scale:
+        - 1.0
+        - 1.0
+        - 1.0
+      history_length: 1
+    projected_gravity:
+      params:
+      clip: null
+      scale:
+        - 1.0
+        - 1.0
+        - 1.0
+      history_length: 1
+    velocity_commands:
+      params:
+      clip: null
+      scale:
+        - 1.0
+        - 1.0
+        - 1.0
+      history_length: 1
+    joint_pos_rel:
+      params:
+      clip: null
+      scale:
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+      history_length: 1
+    joint_vel_rel:
+      params:
+      clip: null
+      scale:
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+      history_length: 1
+    last_action:
+      params:
+      clip: null
+      scale:
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+      history_length: 1
+  policy_history:
+    base_ang_vel:
+      params:
+      clip: null
+      scale:
+        - 1.0
+        - 1.0
+        - 1.0
+      history_length: 100
+    projected_gravity:
+      params:
+      clip: null
+      scale:
+        - 1.0
+        - 1.0
+        - 1.0
+      history_length: 100
+    velocity_commands:
+      params:
+      clip: null
+      scale:
+        - 1.0
+        - 1.0
+        - 1.0
+      history_length: 100
+    joint_pos_rel:
+      params:
+      clip: null
+      scale:
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+      history_length: 100
+    joint_vel_rel:
+      params:
+      clip: null
+      scale:
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+      history_length: 100
+    last_action:
+      params:
+      clip: null
+      scale:
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+        - 1.0
+      history_length: 100

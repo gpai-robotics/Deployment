@@ -4,11 +4,16 @@ set -euo pipefail
 REPO_ROOT=$REPO
 echo "REPO      = $REPO"
 echo "REPO_ROOT = $REPO_ROOT"
-SIM_BIN="${REPO_ROOT}/go2/reference_repos/Unitree_mjlab_repo/unitree_rl_mjlab/simulate/build/unitree_mujoco"
-CTRL_BIN="${REPO_ROOT}/go2/reference_repos/Unitree_mjlab_repo/unitree_rl_mjlab/deploy/robots/go2/build/go2_ctrl"
-GO2_SCENE="${REPO_ROOT}/go2/reference_repos/Unitree_mjlab_repo/unitree_rl_mjlab/src/assets/robots/unitree_go2/xmls/scene_go2.xml"
+SIM_BIN="${REPO_ROOT}/go2/reference_repos/unitree_rl_mjlab/simulate/build/unitree_mujoco"
+CTRL_BIN="${REPO_ROOT}/go2/reference_repos/unitree_rl_mjlab/deploy/robots/go2/build/go2_ctrl"
+GO2_SCENE="${REPO_ROOT}/go2/reference_repos/unitree_rl_mjlab/src/assets/robots/unitree_go2/xmls/scene_go2.xml"
 MUJOCO_PYTHON="${MUJOCO_PYTHON:-python}"
 TERRAIN_DIR="${REPO_ROOT}/go2/artifacts/mujoco_mjlab_terrains"
+# Prefer the exact ONNX Runtime ABI bundled with this controller.  This also
+# lets an already-built controller start while a stale absolute RUNPATH is
+# repaired by rebuilding it with build_unitree_mjlab_runtime.sh.
+ONNXRUNTIME_LIB_DIR="${REPO_ROOT}/go2/reference_repos/unitree_rl_mjlab/deploy/thirdparty/onnxruntime-linux-x64-1.22.0/lib"
+export LD_LIBRARY_PATH="${ONNXRUNTIME_LIB_DIR}${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
 source "${REPO_ROOT}/go2/scripts/deploy/go2_network.sh"
 
 usage() {

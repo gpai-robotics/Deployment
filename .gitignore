@@ -29,6 +29,7 @@ go2/artifacts/*
 go2/reference_repos/sim2real_unitree_sdk2py
 go2/reference_repos/unitree_sdk2
 go2/reference_repos/unitree_rl_mjlab
+go2/reference_repos/unitree_rl_mjlab_repo
 
 # Policy bundles (keep the directory visible in Git)
 go2/policies/*

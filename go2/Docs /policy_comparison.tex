@@ -1,0 +1,108 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+
+\begin{document}
+
+\begin{table}[ht]
+\centering
+\caption{Comparison between the baseline and latest deployment policies.}
+\label{tab:policy_comparison}
+
+\renewcommand{\arraystretch}{1.25}
+
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash\bfseries}p{3.2cm} >{\raggedright\arraybackslash}p{3.8cm} >{\raggedright\arraybackslash}p{3.8cm} >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{Area} & \textbf{Baseline Policy} & \textbf{Latest / Combined-Steps Policy} & \textbf{Difference} \\
+\midrule
+
+Training phase &
+blind-rough-mjlab-asymppo-v1 &
+combined-asymppo-stairs-v1 &
+Different task/training distribution. \\
+
+Checkpoint &
+model\_1999.pt &
+model\_5099.pt &
+Different learned model. \\
+
+Current observation &
+45 values &
+45 values &
+Same. \\
+
+Observation fields/order &
+Angular velocity, projected gravity, velocity command, relative joint position, relative joint velocity, last action &
+Same &
+Same. \\
+
+History input &
+$100 \times 45 = 4500$ values &
+Same &
+Same. \\
+
+History layout &
+isaaclab\_term\_major &
+Same &
+Same. \\
+
+Action output &
+12 values &
+12 values &
+Same. \\
+
+Action type &
+Joint position &
+Same &
+Same. \\
+
+Joint order/mapping &
+Same 12 Go2 joints &
+Same &
+Same. \\
+
+Action scale/offset &
+Scale 0.25 with the same standing offsets &
+Same &
+Same. \\
+
+Control loop &
+50 Hz (0.02 s) &
+Same &
+Same. \\
+
+PD gains/limits &
+Stiffness = 25, damping = 0.5, same effort and velocity limits &
+Same &
+Same. \\
+
+Velocity-command ranges &
+Same x/y/yaw ranges &
+Same &
+Same. \\
+
+Network architecture &
+History encoder + actor (251,404 parameters) &
+Same &
+Same. \\
+
+Network weights &
+Baseline weights &
+All 14 learned tensors differ &
+Main technical difference. \\
+
+\bottomrule
+\end{tabularx}
+
+\end{table}
+
+\bigskip
+
+\noindent\textbf{Summary}
+
+The latest policy is fully plug-compatible with the baseline policy. Both policies use the same deployment interface, including the observation vector, history buffer, action representation, joint ordering, action scaling, control frequency, and PD controller. The only substantive difference is the learned network weights, which result from training on different tasks. Consequently, if the latest policy behaves differently while using the same deployment pipeline, the cause is expected to be the policy itself (e.g., terrain or stair generalization) rather than any mismatch in the deployment interface.
+
+\end{document}
